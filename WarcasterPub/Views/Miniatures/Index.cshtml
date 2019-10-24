@@ -1,0 +1,178 @@
+﻿@model IEnumerable<BusinessLogicLayer.ModelBLL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ModelID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FactionID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FactionName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.JackPoints)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PointCost)
+        </th>
+        <th>
+            @Html.DisplayName("FullCrew Cost")
+        </th>
+        <th>
+            @Html.DisplayName("FA")
+        </th>
+        <th>
+            @Html.DisplayName("SPD")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DEF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARM)
+        </th>
+        <th>
+            @Html.DisplayName("RNG")
+        </th>
+        <th>
+            @Html.DisplayName("P&S")
+        </th>
+        <th>
+            @Html.DisplayName("RNG")
+        </th>
+        <th>
+            @Html.DisplayName("P&S")
+        </th>
+        <th>
+            @Html.DisplayName("RNG")
+        </th>
+        <th>
+            @Html.DisplayName("ROF")
+        </th>
+        <th>
+            @Html.DisplayName("AOE")
+        </th>
+        <th>
+            @Html.DisplayName("POW")
+        </th>
+        <th>
+            @Html.DisplayName("RNG")
+        </th>
+        <th>
+            @Html.DisplayName("ROF")
+        </th>
+        <th>
+            @Html.DisplayName("AOE")
+        </th>
+        <th>
+            @Html.DisplayName("POW")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+    @{int TotalPointCost = item.JackPoints + item.PointCost; }
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ModelID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.FactionID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.FactionName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.JackPoints)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => TotalPointCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullCrewPointCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldAllowence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Speed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeleeRNG1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeleePOW1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeleeRNG2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeleePOW2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RangedRNG1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROF1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AOE1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RangedPOW1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RangedRNG2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROF2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AOE2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RangedPOW2)
+        </td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new { id = item.ModelID }) 
+          @Html.ActionLink("Details", "Details", new { id = item.ModelID }) 
+          @Html.ActionLink("Delete", "Delete", new { id = item.ModelID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,224 @@
+﻿@model BusinessLogicLayer.ModelBLL
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Miniature</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FactionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FactionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FactionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FactionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JackPoints)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JackPoints)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullCrewPointCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullCrewPointCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldAllowence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldAllowence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Speed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Speed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ARM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ARM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RangedRNG1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RangedRNG1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RangedRNG2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RangedRNG2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROF1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROF1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROF2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROF2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AOE1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AOE1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AOE2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AOE2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RangedPOW1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RangedPOW1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RangedPOW2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RangedPOW2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeleeRNG1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeleeRNG1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeleeRNG2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeleeRNG2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeleePOW1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeleePOW1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeleePOW2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeleePOW2)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
