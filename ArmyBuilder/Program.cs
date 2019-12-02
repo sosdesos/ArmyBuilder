@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using BusinessLogicLayer;
 using DataAccessLayer;
 // This is a test console app where I try to acces the BLL and experiment with new methods 
-// to manipulate data
+// to manipulate data and test stored procedures.
 
 namespace ArmyBuilder
 {
@@ -32,6 +32,8 @@ namespace ArmyBuilder
 				Console.WriteLine("Press 2 to edit an entry");
 				Console.WriteLine("Press 3 to delete an entry");
 				Console.WriteLine("Press 4 to see the propertyNames of ModelDAL");
+				Console.WriteLine("Press 5 to see the items of Army 1");
+
 
 				while (!int.TryParse(Console.ReadLine(), out SwitchCase))
 				{
@@ -76,6 +78,16 @@ namespace ArmyBuilder
 						for (int i = 0; i <Properties.Length; i++)
 						{
 							Console.WriteLine(Properties[i].Name);
+						}
+						Console.ReadKey();
+						break;
+					case 5:
+						Console.WriteLine("\r\n\r\n");
+						List<ArmyModelBLL> Army = new List<ArmyModelBLL>();
+							Army = Context.ArmyModelsFindByFactionID(1,1, 0, 100);
+						for (int i = 0; i < Army.Count; i++)
+						{
+							Console.WriteLine(Army[i].ToString());
 						}
 						Console.ReadKey();
 						break;

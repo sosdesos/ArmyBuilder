@@ -10,12 +10,12 @@
     <h4>Role</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.RoleID)
-        </dt>
+        </dt>*@
 
         <dd>
-            @Html.DisplayFor(model => model.RoleID)
+            @Html.HiddenFor(model => model.RoleID)
         </dd>
 
         <dt>
@@ -29,6 +29,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RoleID }) |
-    @Html.ActionLink("Back to List", "Index")
+  @if (User.IsInRole("Developer"))
+  {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoleID }) 
+  <raw> | </raw>
+  }
+  @Html.ActionLink("Back to List", "Index")
 </p>

@@ -25,32 +25,35 @@
     <div class="form-group">
       @Html.LabelFor(model => model.ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.EditorFor(model => model.ModelName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.ModelName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
         @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
       </div>
     </div>
 
+    @*this form field is a dropdown list. this way we both hide the ID/Name double field out and make it easy to choose the right selection. The name of the label has been changed because we show the faction names, not the ID's'*@
     <div class="form-group">
-      @Html.LabelFor(model => model.FactionID, htmlAttributes: new { @class = "control-label col-md-2" })
+      @Html.LabelFor(model => model.FactionName, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.EditorFor(model => model.FactionID, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DropDownListFor(model => model.FactionID, (IEnumerable<SelectListItem>)ViewBag.FactionList, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.FactionID, "", new { @class = "text-danger" })
       </div>
     </div>
 
+    @*This is a pulldown menu for the model type. these values are pulled from the list of constants*@
     <div class="form-group">
-      @Html.LabelFor(model => model.FactionName, htmlAttributes: new { @class = "control-label col-md-2" })
+      @Html.LabelFor(model => model.ModelType, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.EditorFor(model => model.FactionName, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.FactionName, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.ModelType, (IEnumerable<SelectListItem>)ViewBag.ModelTypeList, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ModelType, "", new { @class = "text-danger" })
       </div>
     </div>
 
     <div class="form-group">
-      @Html.LabelFor(model => model.JackPoints, htmlAttributes: new { @class = "control-label col-md-2" })
+      @*@Html.LabelFor(model => model.AttachesToModelID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+      @Html.Label("AttachesTo", htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.EditorFor(model => model.JackPoints, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.JackPoints, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.AttachesToModelID, (IEnumerable<SelectListItem>)ViewBag.ListOfModelsToConnect, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AttachesToModelID, "", new { @class = "text-danger" })
       </div>
     </div>
 
@@ -63,7 +66,9 @@
     </div>
 
     <div class="form-group">
-      @Html.LabelFor(model => model.FullCrewPointCost, htmlAttributes: new { @class = "control-label col-md-2" })
+      @*@Html.LabelFor(model => model.FullCrewPointCost, htmlAttributes: new { @class = "control-label col-md-2" })*@
+      @Html.Label("FullCrewCost", htmlAttributes: new { @class = "control-label col-md-2" })
+
       <div class="col-md-10">
         @Html.EditorFor(model => model.FullCrewPointCost, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.FullCrewPointCost, "", new { @class = "text-danger" })
@@ -71,7 +76,9 @@
     </div>
 
     <div class="form-group">
-      @Html.LabelFor(model => model.FieldAllowence, htmlAttributes: new { @class = "control-label col-md-2" })
+      @*@Html.LabelFor(model => model.FieldAllowence, htmlAttributes: new { @class = "control-label col-md-2" })*@
+      @Html.Label("QtyAllowed", htmlAttributes: new { @class = "control-label col-md-2" })
+
       <div class="col-md-10">
         @Html.EditorFor(model => model.FieldAllowence, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.FieldAllowence, "", new { @class = "text-danger" })
@@ -117,7 +124,7 @@
         @Html.ValidationMessageFor(model => model.ARM, "", new { @class = "text-danger" })
       </div>
     </div>
-    </div>
+  </div>
     </div>
 
 <div class="col-md-6">
@@ -126,16 +133,8 @@
     <div class="form-group">
       @Html.LabelFor(model => model.RangedRNG1, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.EditorFor(model => model.RangedRNG1, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.RangedRNG1, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
         @Html.ValidationMessageFor(model => model.RangedRNG1, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
-      @Html.LabelFor(model => model.RangedRNG2, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.RangedRNG2, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.RangedRNG2, "", new { @class = "text-danger" })
       </div>
     </div>
 
@@ -148,14 +147,6 @@
     </div>
 
     <div class="form-group">
-      @Html.LabelFor(model => model.ROF2, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.ROF2, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.ROF2, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
       @Html.LabelFor(model => model.AOE1, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
         @Html.EditorFor(model => model.AOE1, new { htmlAttributes = new { @class = "form-control" } })
@@ -164,18 +155,34 @@
     </div>
 
     <div class="form-group">
-      @Html.LabelFor(model => model.AOE2, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.AOE2, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.AOE2, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
       @Html.LabelFor(model => model.RangedPOW1, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
         @Html.EditorFor(model => model.RangedPOW1, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.RangedPOW1, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(model => model.RangedRNG2, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.RangedRNG2, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+        @Html.ValidationMessageFor(model => model.RangedRNG2, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(model => model.ROF2, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.ROF2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ROF2, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(model => model.AOE2, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.AOE2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AOE2, "", new { @class = "text-danger" })
       </div>
     </div>
 
@@ -195,19 +202,20 @@
       </div>
     </div>
 
-    <div class="form-group">
-      @Html.LabelFor(model => model.MeleeRNG2, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.MeleeRNG2, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.MeleeRNG2, "", new { @class = "text-danger" })
-      </div>
-    </div>
 
     <div class="form-group">
       @Html.LabelFor(model => model.MeleePOW1, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
         @Html.EditorFor(model => model.MeleePOW1, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.MeleePOW1, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(model => model.MeleeRNG2, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.MeleeRNG2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.MeleeRNG2, "", new { @class = "text-danger" })
       </div>
     </div>
 
@@ -219,10 +227,14 @@
       </div>
     </div>
   </div>
+
     </div>
     <div class="form-group">
       <div class="col-md-offset-2 col-md-10">
         <input type="submit" value="Save" class="btn btn-default" />
+        @*Return the user to his previous page (either index or faction selected index)*@
+        <a class="btn btn-default" href="javascript:void(0);" onclick="history.go(-1);" role="button">Back</a>
+
       </div>
   <div>
     @Html.ActionLink("Back to List", "Index")

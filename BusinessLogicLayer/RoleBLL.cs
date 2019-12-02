@@ -9,7 +9,7 @@ using DataAccessLayer;
 namespace BusinessLogicLayer
 {
 	public class RoleBLL
-	{
+	{// data from the Roles table
 		public int RoleID { get; set; }
 		public string RoleName { get; set; }
 		public RoleBLL(DataAccessLayer.RoleDAL role)

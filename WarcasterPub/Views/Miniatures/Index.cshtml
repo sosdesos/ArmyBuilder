@@ -3,176 +3,224 @@
 @{
     ViewBag.Title = "Index";
 }
+  <div class="col-md-2">
+    <h2>@Html.ActionLink("Index", "Index")</h2>
+    @*<h2>Index</h2>*@
 
-<h2>Index</h2>
+    <p>
+      @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Privateer Pressganger"))
+      {
+        @Html.ActionLink("Create New", "Create")
+      }
+    </p>
+  </div>
+  <div class="col-md-10">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+  @for(int i = 1; i<16; i++)
+  {   /*These are Images that filter the models by Faction*/
+    <a href='@Url.Action("FactionIndex","Miniatures", new { id = i })'>
+      <img src='@Url.Content($"~/Content/Images/FactionLogos/{i}.png")' />
+    </a>
+  }
+   
+  </div>
+    <table class="table table-striped">
+      <tr>
         @*<th>
-            @Html.DisplayNameFor(model => model.ModelID)
-        </th>*@
+        @Html.DisplayNameFor(model => model.ModelID)
+    </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ModelName)
+          @Html.DisplayNameFor(model => model.ModelName)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.FactionID)
-        </th>*@
+        @Html.DisplayNameFor(model => model.FactionID)
+    </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.FactionName)
+          @Html.DisplayNameFor(model => model.FactionName)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.ModelType)
+        </th>
+        <th>
+          @Html.DisplayName("PC")
+        </th>
+        <th>
+          @Html.DisplayName("FC PC")
+        </th>
+        <th>
+          @Html.DisplayName("FA")
+        </th>
+        <th>
+          @Html.DisplayName("SPD")
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.MAT)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.RAT)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.DEF)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.ARM)
+        </th>
+        <th>
+          @Html.DisplayName("Melee")
+        </th>
+        <th>
+          @Html.DisplayName("RNG")
+        </th>
+        <th>
+          @Html.DisplayName("P&S")
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.JackPoints)
+      @Html.DisplayName("RNG")
+    </th>
+    <th>
+      @Html.DisplayName("P&S")
+    </th>*@
+        <th>
+          @Html.DisplayName("Ranged")
+        </th>
+        <th>
+          @Html.DisplayName("RNG")
+        </th>
+        <th>
+          @Html.DisplayName("ROF")
+        </th>
+        <th>
+          @Html.DisplayName("AOE")
+        </th>
+        <th>
+          @Html.DisplayName("POW")
+        </th>
+        @*<th>
+          @Html.DisplayName("RNG")
+        </th>
+        <th>
+          @Html.DisplayName("ROF")
+        </th>
+        <th>
+          @Html.DisplayName("AOE")
+        </th>
+        <th>
+          @Html.DisplayName("POW")
         </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.PointCost)
-        </th>
-        <th>
-            @Html.DisplayName("FullCrew Cost")
-        </th>
-        <th>
-            @Html.DisplayName("FA")
-        </th>
-        <th>
-            @Html.DisplayName("SPD")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MAT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RAT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DEF)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ARM)
-        </th>
-        <th>
-            @Html.DisplayName("RNG")
-        </th>
-        <th>
-            @Html.DisplayName("P&S")
-        </th>
-        <th>
-            @Html.DisplayName("RNG")
-        </th>
-        <th>
-            @Html.DisplayName("P&S")
-        </th>
-        <th>
-            @Html.DisplayName("RNG")
-        </th>
-        <th>
-            @Html.DisplayName("ROF")
-        </th>
-        <th>
-            @Html.DisplayName("AOE")
-        </th>
-        <th>
-            @Html.DisplayName("POW")
-        </th>
-        <th>
-            @Html.DisplayName("RNG")
-        </th>
-        <th>
-            @Html.DisplayName("ROF")
-        </th>
-        <th>
-            @Html.DisplayName("AOE")
-        </th>
-        <th>
-            @Html.DisplayName("POW")
-        </th>
         <th></th>
-    </tr>
+      </tr>
 
-@foreach (var item in Model) {
+      @foreach (var item in Model)
+      {
     <tr>
-    @{int TotalPointCost = item.JackPoints + item.PointCost; }
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ModelID)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelName)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.FactionID)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.FactionName)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.JackPoints)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => TotalPointCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullCrewPointCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FieldAllowence)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Speed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MAT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RAT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DEF)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ARM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeleeRNG1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeleePOW1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeleeRNG2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeleePOW2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RangedRNG1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROF1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AOE1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RangedPOW1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RangedRNG2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROF2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AOE2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RangedPOW2)
-        </td>
-        <td>
-          @Html.ActionLink("Edit", "Edit", new { id = item.ModelID }) 
-          @Html.ActionLink("Details", "Details", new { id = item.ModelID }) 
-          @Html.ActionLink("Delete", "Delete", new { id = item.ModelID })
-        </td>
-    </tr>
-}
+      @*@{int TotalPointCost = item.JackPoints + item.PointCost; }*@
+      @*<td>
+        @Html.DisplayFor(modelItem => item.ModelID)
+    </td>*@
+      <td>
+        @*@Html.DisplayFor(modelItem => item.ModelName)*@
+        @*Clicking the name gets them to details too*@
+        @Html.ActionLink(item.ModelName, "Details", new { id = item.ModelID }, null)
 
-</table>
+      </td>
+      @*<td>
+        @Html.DisplayFor(modelItem => item.FactionID)
+    </td>*@
+      <td>
+        @*@Html.DisplayFor(modelItem => item.FactionName)*@
+        @*this can link the user to the model faction information*@
+        @Html.ActionLink(item.FactionName, "Details", "Factions", new { id = item.FactionID }, null)
+      </td>
+      <td>
+        @Constants.MiniatureTypes[item.ModelType]
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.PointCost)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.FullCrewPointCost)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.FieldAllowence)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Speed)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.MAT)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.RAT)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.DEF)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.ARM)
+      </td>
+      <td>
+        @Html.DisplayName("Left")<br />
+        @Html.DisplayName("Right")
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.MeleeRNG1)<br />
+        @Html.DisplayFor(modelItem => item.MeleeRNG2)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.MeleePOW1)<br />
+        @Html.DisplayFor(modelItem => item.MeleePOW2)
+
+      </td>
+      @*<td>
+      @Html.DisplayFor(modelItem => item.MeleeRNG2)
+    </td>*@
+      @*<td>
+      @Html.DisplayFor(modelItem => item.MeleePOW2)
+    </td>*@
+      <td>
+        @Html.DisplayName("Left")<br />
+        @Html.DisplayName("Right")
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.RangedRNG1)<br />
+        @Html.DisplayFor(modelItem => item.RangedRNG2)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.ROF1)<br />
+        @Html.DisplayFor(modelItem => item.ROF2)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.AOE1)<br />
+        @Html.DisplayFor(modelItem => item.AOE2)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.RangedPOW1)<br />
+        @Html.DisplayFor(modelItem => item.RangedPOW2)
+      </td>
+      @*<td>
+      @Html.DisplayFor(modelItem => item.RangedRNG2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.ROF2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.AOE2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.RangedPOW2)
+    </td>*@
+      <td>
+        @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Privateer Pressganger"))
+        {
+          @Html.ActionLink("Edit", "Edit", new { id = item.ModelID })
+        }
+        @Html.ActionLink("Details", "Details", new { id = item.ModelID })
+        @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Privateer Pressganger"))
+        {
+          @Html.ActionLink("Delete", "Delete", new { id = item.ModelID })
+        }
+      </td>
+    </tr>
+      }
+
+    </table>

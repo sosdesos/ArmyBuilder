@@ -7,31 +7,45 @@
 <h2>Index</h2>
 
 <p>
+  @if (User.IsInRole("Developer"))
+  {
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+  }
+  </p>
+<table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RoleID)
+            @*@Html.DisplayNameFor(model => model.RoleID)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RoleName)
+          @Html.DisplayNameFor(model => model.RoleName)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.RoleID)
+            @Html.HiddenFor(modelItem => item.RoleID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RoleName)
+          @*@Html.DisplayFor(modelItem => item.RoleName)*@
+          @Html.ActionLink(item.RoleName, "Details", new { id = item.RoleID })
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {      id=item.RoleID }) |
-            @Html.ActionLink("Details", "Details", new {id=item.RoleID }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.RoleID })
+          @if (User.IsInRole("Developer"))
+          {
+            @Html.ActionLink("Edit", "Edit", new { id = item.RoleID })
+            @Html.Raw(" | ")
+          }
+          @Html.ActionLink("Details", "Details", new { id = item.RoleID })
+          @if (User.IsInRole("Developer"))
+          {
+            @Html.Raw(" | ")
+            @Html.ActionLink("Delete", "Delete", new { id = item.RoleID })
+          }
+
         </td>
     </tr>
 }

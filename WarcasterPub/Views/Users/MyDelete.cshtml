@@ -1,0 +1,86 @@
+﻿@model BusinessLogicLayer.UserBLL
+
+@{
+  ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you ABSOLUTELY sure you want to delete your Account?</h3>
+<div>
+  <h4>All your data and armies will be lost.</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    @*<dt>
+      @Html.DisplayNameFor(model => model.UserID)
+    </dt>*@
+
+    @*<dd>*@
+      @Html.HiddenFor(model => model.UserID)
+    @*</dd>*@
+
+    <dt>
+      @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.UserName)
+    </dd>
+
+    @*<dt>*@
+      @*@Html.DisplayNameFor(model => model.Hash)*@
+    @*</dt>*@
+
+    @*<dd>*@
+      @Html.HiddenFor(model => model.Hash)
+    @*</dd>*@
+
+    @*<dt>
+      @Html.DisplayNameFor(model => model.Salt)
+    </dt>*@
+
+    @*<dd>*@
+      @Html.HiddenFor(model => model.Salt)
+    @*</dd>*@
+
+    <dt>
+      @Html.DisplayNameFor(model => model.EmailAddress)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.EmailAddress)
+    </dd>
+
+    @*<dt>
+      @Html.DisplayNameFor(model => model.RoleID)
+    </dt>
+
+    <dd>*@
+      @Html.HiddenFor(model => model.RoleID)
+    @*</dd>*@
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Rolename)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Rolename)
+    </dd>
+
+  </dl>
+
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+      <input type="submit" value="Delete" class="btn btn-default" /> |
+<a class="btn btn-default" href="MyDetails" role="button">Maybe not today </a>
+      @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+  }
+</div>
+
+
+
+

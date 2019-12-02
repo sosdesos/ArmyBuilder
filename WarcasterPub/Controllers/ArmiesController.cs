@@ -4,43 +4,88 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLogicLayer;
+using ErrorLogger;
+using WarcasterPub.Models;
 
 namespace WarcasterPub.Controllers
 {
-    public class ArmiesController : Controller
+	[MustBeInRole(Roles = Constants.DeveloperRoleName)] public class ArmiesController : Controller
     {
         // GET: Armies
         public ActionResult Index()
 		{
-			List<ArmyBLL> items = null;
-			using (ContextBLL ctx = new ContextBLL())
+			List<ArmyBLL> armies = null;
+			try
 			{
-				items = ctx.ArmiesGetAll(0, 100);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					armies = ctx.ArmiesGetAll(Constants.DefaultPageNumber, Constants.DefaultPageSize);
+				}
 			}
-			return View(items);
+			catch(Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
+			}
+			return View(armies);
 		}
 
 		// GET: Armies/Details/5
 		public ActionResult Details(int id)
 		{
-			ArmyBLL item = null;
-			using (ContextBLL ctx = new ContextBLL())
+			ArmyBLL army = null;
+			try
 			{
-				item = ctx.ArmyFindByID(id);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					army = ctx.ArmyFindByID(id);
+				}
 			}
-			return View(item);
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
+			}
+			return View(army);
 		}
 
 		// GET: Armies/Create
 		public ActionResult Create()
         {
-            return View();
+			#region Pulldown Stuff
+			List<SelectListItem> ListOfFactions = new List<SelectListItem>();
+			try
+			{
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					List<FactionBLL> factions = ctx.FactionsGetAll(0, 100);
+					ViewBag.FactionList = ListOfFactions;
+					foreach (FactionBLL faction in factions)
+					{
+						SelectListItem i = new SelectListItem();
+						i.Text = faction.FactionName;
+						i.Value = faction.FactionID.ToString();
+						ListOfFactions.Add(i);
+					}
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
+			}
+			#endregion Pulldown Stuff
+			return View();
         }
 
         // POST: Armies/Create
         [HttpPost]
 		public ActionResult Create(ArmyBLL NewArmy)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(NewArmy);
+			}
 			try
 			{
 				int NewArmyID = 0;
@@ -52,7 +97,8 @@ namespace WarcasterPub.Controllers
 			}
 			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
 
@@ -60,9 +106,17 @@ namespace WarcasterPub.Controllers
 		public ActionResult Edit(int id)
 		{
 			ArmyBLL item = null;
-			using (ContextBLL ctx = new ContextBLL())
+			try
 			{
-				item = ctx.ArmyFindByID(id);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					item = ctx.ArmyFindByID(id);
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 			return View(item);
 		}
@@ -71,6 +125,10 @@ namespace WarcasterPub.Controllers
 		[HttpPost]
         public ActionResult Edit(int id, ArmyBLL ArmyToEdit)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(ArmyToEdit);
+			}
 			try
 			{
 				using (ContextBLL ctx = new ContextBLL())
@@ -82,7 +140,8 @@ namespace WarcasterPub.Controllers
 			}
 			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
 
@@ -90,9 +149,17 @@ namespace WarcasterPub.Controllers
 		public ActionResult Delete(int id)
 		{
 			ArmyBLL item = null;
-			using (ContextBLL ctx = new ContextBLL())
+			try
 			{
-				item = ctx.ArmyFindByID(id);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					item = ctx.ArmyFindByID(id);
+				}
+			}
+			catch(Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 			return View(item);
 		}
@@ -111,7 +178,8 @@ namespace WarcasterPub.Controllers
 			}
 			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
     }

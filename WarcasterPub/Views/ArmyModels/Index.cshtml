@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BusinessLogicLayer.ArmyBLL>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+  @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+<table class="table table-hover">
+  <tr>
+    <th>
+      @*@Html.DisplayNameFor(model => model.ArmyID)*@
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.ArmyName)
+    </th>
+    <th>
+      @*@Html.DisplayNameFor(model => model.UserID)*@
+    </th>
+    @if (User.IsInRole("Administrator") | User.IsInRole("Developer"))
+    {
+    <th>
+      @Html.DisplayNameFor(model => model.UserName)
+    </th>
+    }
+    <th>
+      @Html.DisplayNameFor(model => model.Comments)
+    </th>
+    <th>
+      @*@Html.DisplayNameFor(model => model.FactionID)*@
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.FactionName)
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+<tr>
+  <td>
+    @Html.HiddenFor(modelItem => item.ArmyID)
+  </td>
+  <td>
+    @*@Html.DisplayFor(modelItem => item.ArmyName)*@
+    @Html.ActionLink(item.ArmyName, "Details", new { id = item.ArmyID }, null)
+
+  </td>
+  <td>
+    @Html.HiddenFor(modelItem => item.UserID)
+  </td>
+
+  @if (User.IsInRole("Administrator") | User.IsInRole("Developer"))
+  {
+<td>
+  @*@Html.DisplayFor(modelItem => item.UserName)*@
+  @Html.ActionLink(item.UserName, "Details", "Users", new { id = item.UserID }, null)
+
+</td>
+  }
+  <td>
+    @if (Constants.MaxIndexCommentSize < @item.Comments.Length)
+    {
+      @item.Comments.Substring(0, Constants.MaxIndexCommentSize)
+    }
+    else
+    {
+      @Html.DisplayFor(modelItem => item.Comments)
+    }
+  </td>
+  <td>
+    @Html.HiddenFor(modelItem => item.FactionID)
+  </td>
+  <td>
+    @*@Html.DisplayFor(modelItem => item.FactionName)*@
+    @Html.ActionLink(item.FactionName, "Details", "Factions", new { id = item.FactionID }, null)
+
+  </td>
+  <td>
+    @Html.ActionLink("Edit", "Edit", new { id = item.ArmyID }) |
+    @Html.ActionLink("Details", "Details", new { id = item.ArmyID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.ArmyID })
+  </td>
+</tr>
+  }
+
+</table>

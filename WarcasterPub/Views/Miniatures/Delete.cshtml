@@ -6,212 +6,219 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you Absolutely sure you want to delete this?</h3>
+<h4>All miniatures that attach to this miniature will also be deleted</h4>
 <div>
     <h4>Miniature</h4>
     <hr />
     <dl class="dl-horizontal">
+    @Html.HiddenFor(model => model.ModelID)
+      <dt>
+        @Html.DisplayNameFor(model => model.ModelName)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.ModelName)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.FactionName)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.FactionName)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.ModelType)
+      </dt>
+
+      <dd>
+        @Constants.MiniatureTypes[Model.ModelType]
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.PointCost)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.PointCost)
+      </dd>
+
+
+      @if (Model.FullCrewPointCost > 0)
+      {
         <dt>
-            @Html.DisplayNameFor(model => model.ModelID)
+          @Html.DisplayNameFor(model => model.FullCrewPointCost)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModelID)
+          @Html.DisplayFor(model => model.FullCrewPointCost)
         </dd>
+      }
 
+      <dt>
+        @Html.DisplayNameFor(model => model.FieldAllowence)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.FieldAllowence)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.Speed)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Speed)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.MAT)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.MAT)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.RAT)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.RAT)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.DEF)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.DEF)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.ARM)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.ARM)
+      </dd>
+
+      @if (Model.RangedPOW1 > 0)
+      {
         <dt>
-            @Html.DisplayNameFor(model => model.ModelName)
+          @Html.DisplayNameFor(model => model.RangedRNG1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModelName)
+          @Html.DisplayFor(model => model.RangedRNG1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FactionID)
+          @Html.DisplayNameFor(model => model.ROF1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FactionID)
+          @Html.DisplayFor(model => model.ROF1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FactionName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FactionName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JackPoints)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JackPoints)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PointCost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PointCost)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FullCrewPointCost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullCrewPointCost)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FieldAllowence)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FieldAllowence)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Speed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Speed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MAT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MAT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RAT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RAT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DEF)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DEF)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ARM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ARM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RangedRNG1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RangedRNG1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RangedRNG2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RangedRNG2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ROF1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ROF1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ROF2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ROF2)
-        </dd>
-
-        <dt>
+        if (Model.AOE1 > 0)
+        {
+          <dt>
             @Html.DisplayNameFor(model => model.AOE1)
-        </dt>
+          </dt>
 
-        <dd>
+          <dd>
             @Html.DisplayFor(model => model.AOE1)
+          </dd>
+        }
+
+        <dt>
+          @Html.DisplayNameFor(model => model.RangedPOW1)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.RangedPOW1)
+        </dd>
+      }
+
+      @if (Model.RangedPOW2 > 0)
+      {
+        <dt>
+          @Html.DisplayNameFor(model => model.RangedRNG2)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.RangedRNG2)
         </dd>
 
         <dt>
+          @Html.DisplayNameFor(model => model.ROF2)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.ROF2)
+        </dd>
+
+        if (Model.AOE2 > 0)
+        {
+          <dt>
             @Html.DisplayNameFor(model => model.AOE2)
-        </dt>
+          </dt>
 
-        <dd>
+          <dd>
             @Html.DisplayFor(model => model.AOE2)
-        </dd>
+          </dd>
+        }
 
         <dt>
-            @Html.DisplayNameFor(model => model.RangedPOW1)
+          @Html.DisplayNameFor(model => model.RangedPOW2)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RangedPOW1)
+          @Html.DisplayFor(model => model.RangedPOW2)
         </dd>
+      }
 
+      @if (Model.MeleePOW1 > 0)
+      {
         <dt>
-            @Html.DisplayNameFor(model => model.RangedPOW2)
+          @Html.DisplayNameFor(model => model.MeleeRNG1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RangedPOW2)
+          @Html.DisplayFor(model => model.MeleeRNG1)
         </dd>
 
+
         <dt>
-            @Html.DisplayNameFor(model => model.MeleeRNG1)
+          @Html.DisplayNameFor(model => model.MeleePOW1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MeleeRNG1)
+          @Html.DisplayFor(model => model.MeleePOW1)
         </dd>
+      }
 
+      @if (Model.MeleePOW2 > 0)
+      {
         <dt>
-            @Html.DisplayNameFor(model => model.MeleeRNG2)
+          @Html.DisplayNameFor(model => model.MeleeRNG2)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MeleeRNG2)
+          @Html.DisplayFor(model => model.MeleeRNG2)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.MeleePOW1)
+          @Html.DisplayNameFor(model => model.MeleePOW2)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MeleePOW1)
+          @Html.DisplayFor(model => model.MeleePOW2)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MeleePOW2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MeleePOW2)
-        </dd>
-
-    </dl>
+      }
+      </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

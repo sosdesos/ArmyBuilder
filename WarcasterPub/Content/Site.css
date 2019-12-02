@@ -1,12 +1,19 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  background-image: url('Background/89091.jpg');
+  background-attachment: fixed;
 }
 
+.navbar-inverse {
+  background-color: #222222d9;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0.9;
+  background-color: white;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

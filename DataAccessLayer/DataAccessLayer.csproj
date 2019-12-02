@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="ArmyDAL.cs" />
     <Compile Include="ArmyMapper.cs" />
+    <Compile Include="ArmyModelDAL.cs" />
+    <Compile Include="ArmyModelMapper.cs" />
+    <Compile Include="ArmyModelRecordDAL.cs" />
     <Compile Include="ContextDAL.cs" />
     <Compile Include="FactionDAL.cs" />
     <Compile Include="FactionMapper.cs" />
@@ -54,6 +57,12 @@
     <Compile Include="RoleMapper.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="UserMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ErrorLogger\ErrorLogger.csproj">
+      <Project>{b8b21eb8-3a71-4d55-901a-71cab25fe986}</Project>
+      <Name>ErrorLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -121,6 +121,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmiesController.cs" />
+    <Compile Include="Controllers\ArmyModelsController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FactionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MiniaturesController.cs" />
@@ -129,14 +131,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Filters.cs" />
     <Compile Include="Models\LoginData.cs" />
+    <Compile Include="Models\RegisterData.cs" />
+    <Compile Include="Models\WebAppConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Background\89091.jpg" />
+    <Content Include="Content\Background\rusty-metal-42094-3840x2160.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\pics\cantletyoudothat.jpg" />
+    <Content Include="Content\pics\Cygnar.jpg" />
+    <Content Include="Content\pics\Khador.jpg" />
+    <Content Include="Content\pics\Magnus.jpg" />
+    <Content Include="Content\pics\Mercenaries.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -183,18 +195,30 @@
     <Content Include="Views\Miniatures\Delete.cshtml" />
     <Content Include="Views\Miniatures\Details.cshtml" />
     <Content Include="Views\Miniatures\Edit.cshtml" />
-    <Content Include="Views\Factions\Create.cshtml" />
-    <Content Include="Views\Factions\Details.cshtml" />
-    <Content Include="Views\Factions\Delete.cshtml" />
     <Content Include="Views\Factions\Index.cshtml" />
-    <Content Include="Views\Armies\Index.cshtml" />
-    <Content Include="Views\Armies\Create.cshtml" />
-    <Content Include="Views\Armies\Delete.cshtml" />
-    <Content Include="Views\Armies\Details.cshtml" />
-    <Content Include="Views\Armies\Edit.cshtml" />
-    <Content Include="Views\Factions\Edit.cshtml" />
     <Content Include="Views\Miniatures\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Armies\Create.cshtml" />
+    <Content Include="Views\Armies\Index.cshtml" />
+    <Content Include="Views\Armies\Details.cshtml" />
+    <Content Include="Views\Armies\Edit.cshtml" />
+    <Content Include="Views\Armies\Delete.cshtml" />
+    <Content Include="Views\ArmyModels\Index.cshtml" />
+    <Content Include="Views\ArmyModels\Details.cshtml" />
+    <Content Include="Views\ArmyModels\Edit.cshtml" />
+    <Content Include="Views\Users\MyDetails.cshtml" />
+    <Content Include="Views\Users\MyEdit.cshtml" />
+    <Content Include="Views\Users\MyDelete.cshtml" />
+    <Content Include="Views\ArmyModels\Create.cshtml" />
+    <Content Include="Views\ArmyModels\Delete.cshtml" />
+    <Content Include="Views\Shared\Porpoise.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Factions\Create.cshtml" />
+    <Content Include="Views\Factions\Delete.cshtml" />
+    <Content Include="Views\Factions\Details.cshtml" />
+    <Content Include="Views\Factions\Edit.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -216,6 +240,14 @@
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
       <Project>{ac2dc815-9b3e-4c32-88e9-20fda19c7c69}</Project>
       <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{FC49106B-EBBD-41A3-B822-DE7C91B0EA1A}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ErrorLogger\ErrorLogger.csproj">
+      <Project>{b8b21eb8-3a71-4d55-901a-71cab25fe986}</Project>
+      <Name>ErrorLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

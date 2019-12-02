@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArmyBLL.cs" />
+    <Compile Include="ArmyModelBLL.cs" />
+    <Compile Include="ArmyModelRecordBLL.cs" />
     <Compile Include="ContextBLL.cs" />
     <Compile Include="FactionBLL.cs" />
+    <Compile Include="FullArmyData.cs" />
     <Compile Include="ModelBLL.cs" />
     <Compile Include="RoleBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +58,10 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{fc49106b-ebbd-41a3-b822-de7c91b0ea1a}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ErrorLogger\ErrorLogger.csproj">
+      <Project>{b8b21eb8-3a71-4d55-901a-71cab25fe986}</Project>
+      <Name>ErrorLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

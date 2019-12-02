@@ -1,7 +1,27 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿
+@{
+  ViewBag.Title = "About Warcaster Pub";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h3>What is Warcaster Pub</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>
+  Warcaster Pub was created as a Bootcamp project to learn C#, SQL and MVC. It can be used to build Armylists for a miniature wargame called "WarMachine" and "Hordes" by Privateer press. Using this tool you will not have to worry about how many times you are allowed to put a model in your army, and what the "pointcost" of said army is. You can take notes in your army to help you remember what tactics worked well, and how you could maybe improve it. <br />
+  Warcaster Pub is not a product by Privateer press, but uses information about miniatures and factions created by Privateer press and is not to be used for commercial purpose.
+
+</p>
+
+@if (ViewBag.Notification != null)
+{
+<div class="alert alert-success">
+  @*<a href="#" class="close" data-dismiss="alert">&times;</a>*@
+  @ViewBag.Notification
+  </div>
+}
+<script>
+window.setTimeout(function () {
+    $(".alert-success").fadeTo(500, 0).slideUp(500, function () {
+        $(this).remove();
+    });
+}, 2000);
+</script>

@@ -8,8 +8,9 @@ namespace DataAccessLayer
 {
 	public class FactionDAL
 	{   //this class stores all the data from the Factions table
-		public int FactionID { get; set; }
 		public string FactionName { get; set; }
+		public int FactionID { get; set; }
+		public string BackGround { get; set; }
 
 		public override string ToString()
 		{

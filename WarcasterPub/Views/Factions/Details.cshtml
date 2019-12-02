@@ -1,34 +1,63 @@
 ﻿@model BusinessLogicLayer.FactionBLL
 
 @{
-    ViewBag.Title = "Details";
+  ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
 <div>
-    <h4>Faction</h4>
-    <hr />
+  @*<hr />*@
+  <br />
+  <div class="col-md-4">
+
+    @*<dl class="dl-horizontal">*@
+    @*<dt>
+        @Html.DisplayNameFor(model => model.FactionID)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.FactionID)
+      </dd>*@
+
+    @*<dt>
+        @Html.DisplayNameFor(model => model.FactionName)
+      </dt>*@
+
+    @*<dd>*@
+    <h1> @Html.DisplayFor(model => model.FactionName) </h1>
+    @*</dd>*@
+    @*</dl>*@
+    @*<div class="col-md-6">*@
+    <img src='@Url.Content($"~/Content/Images/LargeLogos/{Model.FactionID}.jpg")'>
+    @*</div>*@
+  </div>
+  <div class="col-md-8">
+    <img src='@Url.Content($"~/Content/Images/FactionPic/{Model.FactionID}.jpg")'>
+  </div>
+  <div class="col-md-12">
+    <br />
+    <br />
+    <br />
+  </div>
+  <div class="col-md-12">
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FactionID)
-        </dt>
+      <dt>
+        @Html.DisplayNameFor(model => model.BackGround)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FactionID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FactionName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FactionName)
-        </dd>
-
+      <dd>
+        @Html.DisplayFor(model => model.BackGround)
+      </dd>
     </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.FactionID  }) |
+  </div>
+  <div class="col-md-12">
+    @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Privateer Pressganger"))
+    {
+      @Html.ActionLink("Edit", "Edit", new { id = Model.FactionID })
+      <raw> | </raw>
+    }
     @Html.ActionLink("Back to List", "Index")
-</p>
+  </div>
+</div>
+

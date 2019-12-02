@@ -6,26 +6,39 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you ABSOLUTELY sure you want to delete this? This record will be permenantly deleted.</h3>
 <div>
-    <h4>Faction</h4>
     <hr />
     <dl class="dl-horizontal">
+      @if (User.IsInRole("Developer"))
+      {
         <dt>
-            @Html.DisplayNameFor(model => model.FactionID)
+          @Html.DisplayNameFor(model => model.FactionID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FactionID)
+          @Html.DisplayFor(model => model.FactionID)
         </dd>
+      }
+      else
+      {
+        @Html.HiddenFor(model => model.FactionID)
+      }
+      <dt>
+        @Html.DisplayNameFor(model => model.FactionName)
+      </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FactionName)
-        </dt>
+      <dd>
+        @Html.DisplayFor(model => model.FactionName)
+      </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FactionName)
-        </dd>
+      <dt>
+        @Html.DisplayNameFor(model => model.BackGround)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.BackGround)
+      </dd>
 
     </dl>
 

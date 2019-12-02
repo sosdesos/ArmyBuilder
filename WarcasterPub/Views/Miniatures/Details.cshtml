@@ -10,13 +10,6 @@
     <h4>Miniature</h4>
     <hr />
     <dl class="dl-horizontal">
-      @*<dt>
-        @Html.DisplayNameFor(model => model.ModelID)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ModelID)
-    </dd>*@
 
       <dt>
         @Html.DisplayNameFor(model => model.ModelName)
@@ -26,14 +19,6 @@
         @Html.DisplayFor(model => model.ModelName)
       </dd>
 
-      @*<dt>
-        @Html.DisplayNameFor(model => model.FactionID)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.FactionID)
-    </dd>*@
-
       <dt>
         @Html.DisplayNameFor(model => model.FactionName)
       </dt>
@@ -41,32 +26,15 @@
       <dd>
         @Html.DisplayFor(model => model.FactionName)
       </dd>
-      @if (Model.JackPoints > 0)
-      {
+
         <dt>
-          @Html.DisplayNameFor(model => model.JackPoints)
+          @Html.DisplayNameFor(model => model.ModelType)
         </dt>
 
         <dd>
-          @Html.DisplayFor(model => model.JackPoints)
+          @Constants.MiniatureTypes[Model.ModelType]
         </dd>
-      }
-      @if (Model.JackPoints < 0)
-      {
-        <dt>
-          @Html.DisplayName("Warcaster Points")
-        </dt>
-        int WarcasterPoints = Model.JackPoints * -1;
-        <dd>
-          @WarcasterPoints
-        </dd>
-        @*<dd>
-        @Html.DisplayFor( Model=> Model.JackPoints )
-      </dd>*@
-      }
 
-      @if (Model.PointCost > 0)
-      {
         <dt>
           @Html.DisplayNameFor(model => model.PointCost)
         </dt>
@@ -74,7 +42,7 @@
         <dd>
           @Html.DisplayFor(model => model.PointCost)
         </dd>
-      }
+
 
       @if (Model.FullCrewPointCost > 0)
       {
@@ -252,6 +220,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.ModelID }) |
-    @Html.ActionLink("Back to List", "Index")
+  @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Privateer Pressganger"))
+  {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ModelID })
+    <raw> | </raw>
+  }
+  @Html.ActionLink("Back to Miniatures", "Index") | 
+  @Html.ActionLink($"Back to {Model.FactionName}", "FactionIndex" , new {  id = Model.FactionID})
 </p>

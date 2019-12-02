@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLogicLayer;
+using ErrorLogger;
+using WarcasterPub.Models;
 
 namespace WarcasterPub.Controllers
 {
@@ -11,36 +13,110 @@ namespace WarcasterPub.Controllers
 	{
 		// GET: Models
 		public ActionResult Index()
-		{
+		{	// just retreives all 
 			List<ModelBLL> items = null;
-			using (ContextBLL ctx = new ContextBLL())
+			try
 			{
-				items = ctx.ModelsGetAll(0, 100);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					items = ctx.ModelsGetAll(Constants.DefaultPageNumber, Constants.DefaultPageSize);
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 			return View(items);
+		}
+		// GET: Models
+		public ActionResult FactionIndex(int id)
+		{   // retreives all models from 1 faction
+			List<ModelBLL> items = null;
+			try
+			{
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					items = ctx.ModelsFindByFactionID(id, 0, 100);
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
+			}
+			return View("Index",items);
 		}
 
 		// GET: Models/Details/5
 		public ActionResult Details(int id)
 		{
 			ModelBLL item = null;
-			using (ContextBLL ctx = new ContextBLL())
+			try
 			{
-				item = ctx.ModelFindByID(id);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					item = ctx.ModelFindByID(id);
+					if (item == null)
+					{
+						return View("NotFound");
+					}
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 			return View(item);
 		}
 
 		// GET: Models/Create
-		public ActionResult Create()
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)] public ActionResult Create()
 		{
+			#region Pulldown Stuff
+			List<SelectListItem> ListOfFactions   = new List<SelectListItem>();
+			List<SelectListItem> ListOfModelTypes = new List<SelectListItem>();
+			try
+			{
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					List<FactionBLL> factions = ctx.FactionsGetAll(0, 100);
+					ViewBag.FactionList = ListOfFactions;
+					foreach (FactionBLL faction in factions)
+					{
+						SelectListItem i = new SelectListItem();
+						i.Text = faction.FactionName;
+						i.Value = faction.FactionID.ToString();
+						ListOfFactions.Add(i);
+					}
+					ViewBag.ModelTypeList = ListOfModelTypes;
+					for (int i = 0; i < Constants.MiniatureTypes.Count; i++)
+					{
+						SelectListItem Types = new SelectListItem();
+						Types.Text = Constants.MiniatureTypes[i];
+						Types.Value = i.ToString();
+						ListOfModelTypes.Add(Types);
+					}
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
+			}
+			#endregion Pulldown Stuff
 			return View();
 		}
 
 		// POST: Models/Create
 		[HttpPost]
-		public ActionResult Create(ModelBLL NewModel)
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)] public ActionResult Create(ModelBLL NewModel)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(NewModel);
+			}
 			try
 			{
 				int NewModelID = 0;
@@ -50,27 +126,87 @@ namespace WarcasterPub.Controllers
 				}
 				return RedirectToAction("Details", new { id = NewModelID });
 			}
-			catch(Exception oops)
+			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
 
 		// GET: Models/Edit/5
-		public ActionResult Edit(int id)
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)]public ActionResult Edit(int id)
 		{
-			ModelBLL item = null;
+			List<SelectListItem> ListOfFactions = new List<SelectListItem>();
+			List<SelectListItem> ListOfModelTypes = new List<SelectListItem>();
+			List<SelectListItem> ListOfModelsToConnect = new List<SelectListItem>();
+
+			ModelBLL miniature = null;
 			using (ContextBLL ctx = new ContextBLL())
-			{
-				item = ctx.ModelFindByID(id);
-			}
-			return View(item);
+				try
+				{
+					miniature = ctx.ModelFindByID(id);
+					if (miniature == null)
+					{
+						return View("NotFound");
+					}
+					{
+						#region Pulldown Stuff
+						List<FactionBLL> factions = ctx.FactionsGetAll(0, 100);
+						ViewBag.FactionList = ListOfFactions;
+						foreach (FactionBLL faction in factions)
+						{// Pulldown list for the Factions
+							SelectListItem i = new SelectListItem();
+							i.Text = faction.FactionName;
+							i.Value = faction.FactionID.ToString();
+							ListOfFactions.Add(i);
+						}
+
+						ViewBag.ModelTypeList = ListOfModelTypes;
+						for (int i = 0; i < Constants.MiniatureTypes.Count; i++)
+						{//Pulldown list for the ModelType, this is important for point calculations
+							SelectListItem Types = new SelectListItem();
+							Types.Text = Constants.MiniatureTypes[i];
+							Types.Value = i.ToString();
+							ListOfModelTypes.Add(Types);
+						}
+
+						List<ModelBLL> ModelsToAttach = ctx.ModelsFindByFactionID(miniature.FactionID, Constants.DefaultPageNumber, Constants.DefaultPageSize);
+						ViewBag.ListOfModelsToConnect = ListOfModelsToConnect;
+						for (int i = 0; i <= ModelsToAttach.Count; i++)
+						{//Pulldown list for the ModelType, this is important for point calculations
+							SelectListItem parent = new SelectListItem();
+							if (0 == i)
+							{
+								parent.Text = "None";
+								parent.Value = i.ToString();
+								ListOfModelsToConnect.Add(parent);
+							}
+							else
+							{
+								parent.Text = ModelsToAttach[i - 1].ModelName;
+								parent.Value = ModelsToAttach[i - 1].ModelID.ToString();
+								ListOfModelsToConnect.Add(parent);
+							}
+						}
+						#endregion Pulldown Stuff
+					}
+				}
+				catch (Exception oops)
+				{
+					Error.Log(oops);
+					return View("Error", oops);
+				}
+			return View(miniature);
 		}
 
 		// POST: Models/Edit/5
 		[HttpPost]
-		public ActionResult Edit(int id, ModelBLL ModelToEdit)
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)] public ActionResult Edit(int id, ModelBLL ModelToEdit)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(ModelToEdit);
+			}
 			try
 			{
 				using (ContextBLL ctx = new ContextBLL())
@@ -82,24 +218,37 @@ namespace WarcasterPub.Controllers
 			}
 			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
 
 		// GET: Models/Delete/5
-		public ActionResult Delete(int id)
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)] public ActionResult Delete(int id)
 		{
 			ModelBLL item = null;
-			using (ContextBLL ctx = new ContextBLL())
+			try
 			{
-				item = ctx.ModelFindByID(id);
+				using (ContextBLL ctx = new ContextBLL())
+				{
+					item = ctx.ModelFindByID(id);
+					if (item == null)
+					{
+						return View("NotFound");
+					}
+				}
+			}
+			catch (Exception oops)
+			{
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 			return View(item);
 		}
 
 		// POST: Models/Delete/5
 		[HttpPost]
-		public ActionResult Delete(int id, ModelBLL ModelToDelete)
+		[MustBeInRole(Roles = Constants.PressgangerRoleName)] public ActionResult Delete(int id, ModelBLL ModelToDelete)
 		{
 			try
 			{
@@ -111,7 +260,8 @@ namespace WarcasterPub.Controllers
 			}
 			catch (Exception oops)
 			{
-				return View("error", oops);
+				Error.Log(oops);
+				return View("Error", oops);
 			}
 		}
 	}

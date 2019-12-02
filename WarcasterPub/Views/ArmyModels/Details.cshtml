@@ -1,0 +1,328 @@
+﻿@model BusinessLogicLayer.FullArmyData
+
+@{
+  ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+  <h4>Army</h4>
+  <hr />
+  <div class="row">
+    <div class="col-md-4">
+      <dl class="dl-horizontal">
+
+        @*<dt>
+              @Html.DisplayNameFor(model => model.ArmyID)
+          </dt>*@
+
+        <dd>
+          @Html.HiddenFor(model => model.ArmyID)
+        </dd>
+
+        <dt>
+          @Html.DisplayNameFor(model => model.ArmyName)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.ArmyName)
+        </dd>
+
+        @*<dt>
+              @Html.DisplayNameFor(model => model.UserID)
+          </dt>*@
+
+        <dd>
+          @Html.HiddenFor(model => model.UserID)
+        </dd>
+
+        <dt>
+          @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Comments)
+          </dt>
+
+          <dd>
+            @Html.DisplayFor(model => model.Comments)
+          </dd>*@
+
+        @*<dt>
+              @Html.DisplayNameFor(model => model.FactionID)
+          </dt>*@
+
+        <dd>
+          @Html.HiddenFor(model => model.FactionID)
+        </dd>
+
+        <dt>
+          @Html.DisplayNameFor(model => model.FactionName)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.FactionName)
+        </dd>
+        <dt>
+          @Html.DisplayNameFor(model => model.JackPoints)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.JackPoints)
+        </dd>
+
+        <dt>
+          @Html.DisplayNameFor(model => model.ArmyCost)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.ArmyCost)
+        </dd>
+      </dl>
+    </div>
+    <div class="col-md-2">
+      <img src='@Url.Content($"~/Content/Images/FactionLogos/{Model.FactionID}.png")'>
+    </div>
+    <div class="col-md-6">
+      <dl>
+        <dt>
+          @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+          @Html.DisplayFor(model => model.Comments)
+        </dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+  <table class="table table-striped">
+    <tr>
+      @*<th>
+        @Html.DisplayNameFor(model => model.ModelID)
+    </th>*@
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelName)*@
+        @Html.DisplayName("Qty")
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelName)*@
+        @Html.DisplayName("FSQ")
+      </th>
+
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelName)*@
+        @Html.DisplayName("ModelName")
+      </th>
+      @*<th>
+        @Html.DisplayNameFor(model => model.FactionID)
+    </th>*@
+      <th>
+        @Html.DisplayNameFor(model => model.FactionName)
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelType)*@
+        @Html.DisplayName("ModelType")
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.PointCost)*@
+        @Html.DisplayName("PC")
+
+      </th>
+      <th>
+        @Html.DisplayName("FC")
+      </th>
+      <th>
+        @Html.DisplayName("FA")
+      </th>
+      <th>
+        @Html.DisplayName("SPD")
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.MAT)*@
+        @Html.DisplayName("MAT")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.RAT)*@
+        @Html.DisplayName("RAT")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.DEF)*@
+        @Html.DisplayName("DEF")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.ARM)*@
+        @Html.DisplayName("ARM")
+      </th>
+      <th>
+        @Html.DisplayName("Melee")
+      </th>
+      <th>
+        @Html.DisplayName("RNG")
+      </th>
+      <th>
+        @Html.DisplayName("P&S")
+      </th>
+      @*<th>
+      @Html.DisplayName("RNG")
+    </th>
+    <th>
+      @Html.DisplayName("P&S")
+    </th>*@
+      <th>
+        @Html.DisplayName("Ranged")
+      </th>
+      <th>
+        @Html.DisplayName("RNG")
+      </th>
+      <th>
+        @Html.DisplayName("ROF")
+      </th>
+      <th>
+        @Html.DisplayName("AOE")
+      </th>
+      <th>
+        @Html.DisplayName("POW")
+      </th>
+      @*<th>
+      @Html.DisplayName("RNG")
+    </th>
+    <th>
+      @Html.DisplayName("ROF")
+    </th>
+    <th>
+      @Html.DisplayName("AOE")
+    </th>
+    <th>
+      @Html.DisplayName("POW")
+    </th>*@
+      <th></th>
+    </tr>
+
+    @foreach (var item in Model.models)
+    {
+  <tr>
+    @*@{int TotalPointCost = item.JackPoints + item.PointCost; }*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.ModelID)
+    </td>*@
+    <td>
+      @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.FullSquats)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.ModelName)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.FactionID)
+    </td>*@
+    <td>
+      @Html.DisplayFor(modelItem => item.FactionName)
+    </td>
+    <td>
+      @Constants.MiniatureTypes[item.ModelType]
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.PointCost)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.FullCrewPointCost)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.FieldAllowence)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.Speed)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.MAT)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.RAT)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.DEF)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.ARM)
+    </td>
+    <td>
+      @Html.DisplayName("Left")<br />
+      @Html.DisplayName("Right")
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.MeleeRNG1)<br />
+      @Html.DisplayFor(modelItem => item.MeleeRNG2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.MeleePOW1)<br />
+      @Html.DisplayFor(modelItem => item.MeleePOW2)
+    </td>
+    @*<td>
+          @Html.DisplayFor(modelItem => item.MeleeRNG2)
+
+    </td>
+    <td>
+          @Html.DisplayFor(modelItem => item.MeleePOW2)
+
+    </td>*@
+    <td>
+      @Html.DisplayName("Left")<br />
+      @Html.DisplayName("Right")
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.RangedRNG1)<br />
+      @Html.DisplayFor(modelItem => item.RangedRNG2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.ROF1)<br />
+      @Html.DisplayFor(modelItem => item.ROF2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.AOE1)<br />
+      @Html.DisplayFor(modelItem => item.AOE2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.RangedPOW1)<br />
+      @Html.DisplayFor(modelItem => item.RangedPOW2)
+
+    </td>
+    @*<td>
+      @Html.DisplayFor(modelItem => item.RangedRNG2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.ROF2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.AOE2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.RangedPOW2)
+    </td>*@
+  </tr>
+    }
+
+  </table>
+
+  <p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArmyID }) |
+    @Html.ActionLink("Back to List", "Index")
+  </p>
+
+  @{
+    ViewBag.Title = "Details";
+  }

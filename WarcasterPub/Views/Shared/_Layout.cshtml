@@ -1,44 +1,66 @@
 ﻿<!DOCTYPE html>
 <html>
+@section head{
+}
+
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ViewBag.Title - Warcaster Pub</title>
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Warcaster Pub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                <li>@Html.ActionLink("Armies", "Index", "Armies")</li>
-                <li>@Html.ActionLink("Miniatures", "Index", "Miniatures")</li>
-                <li>@Html.ActionLink("Factions", "Index", "Factions")</li>
-                <li>@Html.ActionLink("Login", "Login", "Home")</li>
-
-              </ul>
-            </div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          @Html.ActionLink("Warcaster Pub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Miniatures", "Index", "Miniatures")</li>
+            <li>@Html.ActionLink("Factions", "Index", "Factions")</li>
+            @if (User.Identity.IsAuthenticated)
+            {
+              @*<li>@Html.ActionLink("Armies", "Index", "Armies")</li>*@
+              <li>@Html.ActionLink("Armies", "Index", "ArmyModels")</li>
+              if (User.IsInRole("Developer") | User.IsInRole("Administrator"))
+              {
+                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+              }
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+              <li>@Html.ActionLink("Welcome, Commander " + User.Identity.Name, "MyDetails", "Users") </li>
+              <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+            }
+            else
+            {
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+              <li>@Html.ActionLink("Login", "Login", "Home")</li>
+              <li>@Html.ActionLink("Register", "Register", "Home")</li>
+            }
+
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+      @RenderBody()
+
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+          <p>&copy; @DateTime.Now.Year - Warcaster Pub</p>
         </footer>
-    </div>
+      </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

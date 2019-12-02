@@ -19,7 +19,7 @@ namespace DataAccessLayer
 
 		public UserMapper(SqlDataReader reader)
 		{   //Check if the offset is as expected and return that value if so.
-			//We run this once so we know the mapper is workin as expected
+			//We run this once so we don't have to compare string to string every time we get data
 			OffsetToUserID		= CheckOffset(reader, "UserID"		, 0);
 			OffsetToUserName    = CheckOffset(reader, "UserName"	, 1);
 			OffsetToHash		= CheckOffset(reader, "Hash"		, 2);
@@ -36,11 +36,9 @@ namespace DataAccessLayer
 			ReturnValue.Hash		= reader.GetString(OffsetToHash);
 			ReturnValue.Salt		= reader.GetString(OffsetToSalt);
 			ReturnValue.EmailAdress = reader.GetString(OffsetToEmailAdress);
-			//ReturnValue.RoleID		= reader.GetInt32( OffsetToRoleID);
-			//ReturnValue.Rolename	= reader.GetString(OffsetToRoleName);
+			//changed the way we retrieve the data to GetCleanValue   @ToDo replace old lines
 			ReturnValue.RoleID   = GetCleanValue(reader,OffsetToRoleID, ReturnValue.RoleID);
 			ReturnValue.Rolename = GetCleanValue(reader,OffsetToRoleName, ReturnValue.Rolename);
-
 			return ReturnValue;
 		}
 	}

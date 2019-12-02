@@ -1,0 +1,360 @@
+﻿@model BusinessLogicLayer.FullArmyData
+
+@{
+  ViewBag.Title = "Edit your army";
+}
+
+<h2>Edit your army</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+
+  <div class="form-horizontal">
+    @*<h4>ArmyBLL</h4>*@
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">*@
+    @*@Html.LabelFor(model => model.ArmyID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    @*<div class="col-md-10">*@
+    @Html.HiddenFor(model => model.ArmyID, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.ArmyID, "", new { @class = "text-danger" })
+    @*</div>
+      </div>*@
+    <div class="col-md-6">
+      <div class="form-group">
+        @Html.LabelFor(model => model.ArmyName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+          @Html.EditorFor(model => model.ArmyName, new { htmlAttributes = new { @class = "form-control", @maxlength = "30" } })
+          @Html.ValidationMessageFor(model => model.ArmyName, "", new { @class = "text-danger" })
+        </div>
+      </div>
+
+      @*<div class="form-group">
+        @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">*@
+      @Html.HiddenFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+      @*</div>
+        </div>*@
+
+      <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+          @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+          @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+      </div>
+
+
+      @*<div class="form-group">
+        @Html.LabelFor(model => model.FactionID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">*@
+      @Html.HiddenFor(model => model.FactionID, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.FactionID, "", new { @class = "text-danger" })
+      @*</div>
+        </div>*@
+
+      <div class="form-group">
+        @Html.LabelFor(model => model.FactionName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+          @Html.EditorFor(model => model.FactionName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+          @Html.ValidationMessageFor(model => model.FactionName, "", new { @class = "text-danger" })
+        </div>
+      </div>
+
+      <div class="form-group">
+        @Html.LabelFor(model => model.JackPoints, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+          @Html.EditorFor(model => model.JackPoints, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+          @Html.ValidationMessageFor(model => model.JackPoints, "", new { @class = "text-danger" })
+        </div>
+      </div>
+
+      <div class="form-group">
+        @Html.LabelFor(model => model.ArmyCost, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+          @Html.EditorFor(model => model.ArmyCost, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+          @Html.ValidationMessageFor(model => model.ArmyCost, "", new { @class = "text-danger" })
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+          <input type="submit" value="Save" class="btn btn-default" />
+          <a class="btn btn-default" href="javascript:void(0);" onclick="history.go(-1);" role="button">Back</a>
+          @*Back button goes back in history, not a set URL*@
+          @if (TempData["Message"] != null)
+          { /*if there is a "saved" message we pop up a saved confirmation */
+            <div class="alert-success btn">
+              @TempData["Message"]
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <img src='@Url.Content($"~/Content/Images/FactionLogos/{Model.FactionID}.png")'>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })<br />
+      @*<div class="col-md-10">*@
+      @Html.TextAreaFor(model => model.Comments, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+      @*</div>*@
+    </div>
+  </div>
+
+
+
+  <table class="table table-striped">
+    <tr>
+      @*<th>
+        @Html.DisplayNameFor(model => model.ModelID)
+    </th>*@
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelName)*@
+        @Html.DisplayName("Qty")
+      </th>
+      <th>
+        @Html.DisplayName("Full")
+      </th>
+
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelName)*@
+        @Html.DisplayName("ModelName")
+      </th>
+      @*<th>
+        @Html.DisplayNameFor(model => model.FactionID)
+    </th>*@
+      <th>
+        @Html.DisplayNameFor(model => model.FactionName)
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.ModelType)*@
+        @Html.DisplayName("ModelType")
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.PointCost)*@
+        @Html.DisplayName("PC")
+
+      </th>
+      <th>
+        @Html.DisplayName("FC")
+      </th>
+      @*<th>
+      @Html.DisplayName("FA")
+    </th>*@
+      <th>
+        @Html.DisplayName("SPD")
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.MAT)*@
+        @Html.DisplayName("MAT")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.RAT)*@
+        @Html.DisplayName("RAT")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.DEF)*@
+        @Html.DisplayName("DEF")
+
+      </th>
+      <th>
+        @*@Html.DisplayNameFor(model => model.ARM)*@
+        @Html.DisplayName("ARM")
+      </th>
+      <th>
+        @Html.DisplayName("Melee")
+      </th>
+      <th>
+        @Html.DisplayName("RNG")
+      </th>
+      <th>
+        @Html.DisplayName("P&S")
+      </th>
+      @*<th>
+      @Html.DisplayName("RNG")
+    </th>
+    <th>
+      @Html.DisplayName("P&S")
+    </th>*@
+      <th>
+        @Html.DisplayName("Ranged")
+      </th>
+      <th>
+        @Html.DisplayName("RNG")
+      </th>
+      <th>
+        @Html.DisplayName("ROF")
+      </th>
+      <th>
+        @Html.DisplayName("AOE")
+      </th>
+      <th>
+        @Html.DisplayName("POW")
+      </th>
+      @*<th>
+        @Html.DisplayName("RNG")
+      </th>
+      <th>
+        @Html.DisplayName("ROF")
+      </th>
+      <th>
+        @Html.DisplayName("AOE")
+      </th>
+      <th>
+        @Html.DisplayName("POW")
+      </th>*@
+      <th></th>
+    </tr>
+    @*@{ int count = 0;}*@
+    @for (int count = 0; count < Model.models.Count; count++)
+    //    @foreach (var item in Model.models)
+    {
+  <tr>
+    @*@{int TotalPointCost = item.JackPoints + item.PointCost; }*@
+    @*<td>*@
+    @Html.HiddenFor(modelItem => Model.models[count].ModelID)
+    @*</td>*@
+    <td>
+      @if (2 <= ViewBag.MaxFieldAllowance[count].Count)
+      {
+        @Html.DropDownListFor(model => Model.models[count].Quantity, (IEnumerable<SelectListItem>)ViewBag.MaxFieldAllowance[count], new { htmlAttributes = new { @class = "form-control" } })
+      }
+      else
+      {
+        { Model.models[count].Quantity = 0; }
+        @Html.DisplayName("NA")
+      }
+
+    </td>
+    <td>
+      @{
+        int MaxPulldown = Model.models[count].FieldAllowence;
+        if (Model.models[count].Quantity < Model.models[count].FieldAllowence)
+        {
+          MaxPulldown = Model.models[count].Quantity;
+        }
+      }
+      @if (0 < Model.models[count].FullCrewPointCost && 0 < MaxPulldown)
+      {
+        @Html.DropDownListFor(model => Model.models[count].FullSquats, (IEnumerable<SelectListItem>)ViewBag.MaxFullSquats[count], new { htmlAttributes = new { @class = "form-control" } })
+      }
+      else
+      { @Html.DisplayName("NA")}
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].ModelName)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.FactionID)
+    </td>*@
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].FactionName)
+    </td>
+    <td>
+      @Constants.MiniatureTypes[Model.models[count].ModelType]
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].PointCost)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].FullCrewPointCost)
+    </td>
+    @*<td>
+      @Html.DisplayFor(modelItem => item.FieldAllowence)
+    </td>*@
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].Speed)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].MAT)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].RAT)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].DEF)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].ARM)
+    </td>
+    <td>
+      @Html.DisplayName("Left")<br />
+      @Html.DisplayName("Right")
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].MeleeRNG1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].MeleeRNG2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].MeleePOW1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].MeleePOW2)
+    </td>
+    @*<td>
+      @Html.DisplayFor(modelItem => Model.models[count].MeleeRNG2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].MeleePOW2)
+    </td>*@
+    <td>
+      @Html.DisplayName("Left")<br />
+      @Html.DisplayName("Right")
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].RangedRNG1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].RangedRNG2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].ROF1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].ROF2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].AOE1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].AOE2)
+
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].RangedPOW1)<br />
+      @Html.DisplayFor(modelItem => Model.models[count].RangedPOW2)
+    </td>
+    @*<td>
+      @Html.DisplayFor(modelItem => Model.models[count].RangedRNG2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].ROF2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].AOE2)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => Model.models[count].RangedPOW2)
+    </td>*@
+  </tr>
+    }
+  </table>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+  <script>
+window.setTimeout(function () {
+    $(".alert-success").fadeTo(500, 0).slideUp(500, function () {
+        $(this).remove();
+    });
+}, 2000);
+  </script>
+}

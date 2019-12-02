@@ -9,25 +9,25 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserID)
+            @*@Html.DisplayNameFor(model => model.UserID)*@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Hash)
+            @*@Html.DisplayNameFor(model => model.Hash)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Salt)
+            @*@Html.DisplayNameFor(model => model.Salt)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmailAdress)
+            @Html.DisplayNameFor(model => model.EmailAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RoleID)
+            @*@Html.DisplayNameFor(model => model.RoleID)*@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Rolename)
@@ -38,25 +38,29 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            @Html.HiddenFor(modelItem => item.UserID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+          @*@Html.DisplayFor(modelItem => item.UserName)*@
+          @Html.ActionLink(item.UserName, "Details", new { id = item.UserID }, null)
+
+        </td>
+        <td>  
+            @Html.HiddenFor(modelItem => item.Hash)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Hash)
+            @Html.HiddenFor(modelItem => item.Salt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Salt)
+          @Html.DisplayFor(modelItem => item.EmailAddress)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmailAdress)
+            @Html.HiddenFor(modelItem => item.RoleID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RoleID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rolename)
+          @*@Html.DisplayFor(modelItem => item.Rolename)*@
+          @Html.ActionLink(item.Rolename, "Details", "Roles", new { id = item.RoleID }, null)
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |

@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ArmyID)
+            @*@Html.DisplayNameFor(model => model.ArmyID)*@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ArmyName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserID)
+            @*@Html.DisplayNameFor(model => model.UserID)*@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -26,30 +26,49 @@
         <th>
             @Html.DisplayNameFor(model => model.Comments)
         </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FactionID)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FactionName)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ArmyID)
+            @Html.HiddenFor(modelItem => item.ArmyID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ArmyName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            @Html.HiddenFor(modelItem => item.UserID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+          @Html.DisplayFor(modelItem => item.UserName)
+                  </td>
+        <td>
+        @if(Constants.MaxIndexCommentSize < @item.Comments.Length)
+        {
+          @item.Comments.Substring(0,Constants.MaxIndexCommentSize)
+        }
+        else
+        {
+          @Html.DisplayFor(modelItem => item.Comments)
+        }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Comments)
+            @Html.HiddenFor(modelItem => item.FactionID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArmyID }) |
+            @Html.DisplayFor(modelItem => item.FactionName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {       id=item.ArmyID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ArmyID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArmyID })
+            @Html.ActionLink("Delete", "Delete", new {   id=item.ArmyID })
         </td>
     </tr>
 }

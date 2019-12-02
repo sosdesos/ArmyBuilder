@@ -8,12 +8,12 @@ using DataAccessLayer;
 namespace BusinessLogicLayer
 {
 	public class UserBLL
-	{
+	{// data from the Users table
 		public int    UserID {      get; set; }
 		public string UserName {    get; set; }
 		public string Hash {        get; set; }
 		public string Salt {        get; set; }
-		public string EmailAdress { get; set; }
+		public string EmailAddress{ get; set; }
 		public int    RoleID {      get; set; }
 		public string Rolename {    get; set; }
 		public UserBLL(UserDAL User)
@@ -22,7 +22,7 @@ namespace BusinessLogicLayer
 			UserName =    User.UserName;
 			Hash =        User.Hash;
 			Salt =        User.Salt;
-			EmailAdress = User.EmailAdress;
+			EmailAddress= User.EmailAdress;
 			RoleID =      User.RoleID;
 			Rolename =    User.Rolename;
 		}
@@ -37,7 +37,7 @@ namespace BusinessLogicLayer
 			ReturnValue.UserName    = UserName;
 			ReturnValue.Hash        = Hash;
 			ReturnValue.Salt        = Salt;
-			ReturnValue.EmailAdress = EmailAdress;
+			ReturnValue.EmailAdress = EmailAddress;
 			ReturnValue.RoleID      = RoleID;
 			return ReturnValue;
 		}

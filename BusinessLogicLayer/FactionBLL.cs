@@ -9,13 +9,17 @@ using DataAccessLayer;
 namespace BusinessLogicLayer
 {
 	public class FactionBLL
-	{
+	{// data from the factions table.
 		public int FactionID { get; set; }
+		[Required]
 		public string FactionName { get; set; }
+		[Required]
+		public string BackGround { get; set; }
 		public FactionBLL(FactionDAL Faction)
-		{
+		{// populate properties from the DAL
 			FactionID   = Faction.FactionID;
 			FactionName = Faction.FactionName;
+			BackGround  = Faction.BackGround;
 		}
 		public FactionBLL()
 		{
@@ -26,6 +30,7 @@ namespace BusinessLogicLayer
 			FactionDAL ReturnValue = new FactionDAL();
 			ReturnValue.FactionID   = FactionID;
 			ReturnValue.FactionName = FactionName;
+			ReturnValue.BackGround  = BackGround;
 			return ReturnValue;
 		}
 	}

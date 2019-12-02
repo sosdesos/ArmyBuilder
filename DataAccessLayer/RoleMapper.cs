@@ -13,7 +13,7 @@ namespace DataAccessLayer
 		int OffsetToRoleName;   // Column 1 (hopefully)
 		public RoleMapper(SqlDataReader reader)
 		{   //Check if the offset is as expected and return that value if so.
-			//We run this once so we know the mapper is workin as expected
+			//We run this once so we don't have to compare string to string everytime we get info
 			OffsetToRoleID   = CheckOffset(reader, "RoleID", 0);
 			OffsetToRoleName = CheckOffset(reader, "RoleName", 1);
 

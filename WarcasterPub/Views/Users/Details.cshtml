@@ -10,12 +10,12 @@
     <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.UserID)
-        </dt>
+        </dt>*@
 
         <dd>
-            @Html.DisplayFor(model => model.UserID)
+            @Html.HiddenFor(model => model.UserID)
         </dd>
 
         <dt>
@@ -26,36 +26,36 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Hash)
-        </dt>
+        </dt>*@
 
         <dd>
-            @Html.DisplayFor(model => model.Hash)
+            @Html.HiddenFor(model => model.Hash)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Salt)
-        </dt>
+        </dt>*@
 
         <dd>
-            @Html.DisplayFor(model => model.Salt)
+            @Html.HiddenFor(model => model.Salt)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmailAdress)
+            @Html.DisplayNameFor(model => model.EmailAddress)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmailAdress)
+            @Html.DisplayFor(model => model.EmailAddress)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.RoleID)
-        </dt>
+        </dt>*@
 
         <dd>
-            @Html.DisplayFor(model => model.RoleID)
+            @Html.HiddenFor(model => model.RoleID)
         </dd>
 
         <dt>
